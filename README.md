@@ -25,11 +25,11 @@ Check out the tests folder, for usage examples, and mess around with it to see h
 A tiny exampe on how to use it:
 ```php
 $validator = new Object(
-        "myNumber" => new Integer(0, 10),
-        "myStringArray" => new ArrayList(new Text()),
-        "singeWord" => new Text("/^\w+$/u"),
-        "optionalNumber => new Nullable(new Double()),
-        "optionalWithDefault => new Either(new Text(), "Hello World")
+    "myNumber0to10"      => new Integer(0, 10),
+    "myStringArray"      => new ArrayList(new Text()),
+    "singleWord"         => new Text("/^\w+$/u"),
+    "optionalNumber      => new Nullable(new Double()),
+    "optionalWithDefault => new Either(new Text(), "Hello World")
 );
 
 $validatedData = $validator->check($input, "request");
