@@ -1,5 +1,5 @@
 # typage-php
-### Easily validate data with type classes
+### Easily validate with type classes
  
 Typage-php has a lot to offer. 
 With a single definition you can validate your data, be that for input, output or testing.

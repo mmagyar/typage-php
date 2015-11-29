@@ -1,0 +1,11 @@
+.idea/workspace.xml
+.idea/
+node_modules/
+js/
+style/
+temp
+tools/misc.log
+tools/dump.log
+vendor/
+tool/
+composer.lock

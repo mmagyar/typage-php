@@ -1,0 +1,22 @@
+{
+    "name": "mmagyar/typage-php",
+    "description": "Easily validate data with type classes",
+    "type": "typage-php",
+    "require": {
+        "php": ">=5.4"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mate Magyar",
+            "email": "dev@mmagyar.com"
+        }
+    ],
+    "minimum-stability": "beta",
+    "autoload": {
+        "psr-4": {
+             "mmagyar\\": "src/"
+         }
+    }
+
+}
