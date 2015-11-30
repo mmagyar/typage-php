@@ -26,9 +26,9 @@ class TypeDescription {
         if ($this->typeName) {
             if (isset($description[Type::$propertyPrefix . "type"]))
                 throw new InvalidArgumentException("Additional fields can not contain key '" . Type::$propertyPrefix . "type'");
-            $description[Type::$propertyPrefix . 'type'] = $this->typeName;
+            $description = array_merge([Type::$propertyPrefix . 'type' => $this->typeName], $description);
         }
-//        return [$this->typeName => $this->createDescribe($this->possibleValues)];
+
         return $description;
     }
 
@@ -41,9 +41,7 @@ class TypeDescription {
             return array_map(array($this, 'createDescribe'), $value);
         }
 
-//        return ["__value_literal" => $value];
         return $value;
-
     }
 
     public function __toString() {

@@ -16,7 +16,7 @@ abstract class Type {
      * This should be set only once, before using this validation system
      * @var string
      */
-    public static $propertyPrefix = "__";
+    public static $propertyPrefix = "";
 
 
     /**

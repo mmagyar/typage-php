@@ -20,9 +20,7 @@ class Object extends AbstractAny {
         foreach ($arrayMemberType as $key => $value) {
             $description[$key] = $value->getTypeDescription();
         }
-        //TODO name of type is not set, because type may conflict with possible type key
-        //parent::__construct(new TypeDescription("Object", ["keys"=>$description]), false);
-        parent::__construct(new TypeDescription("Object", $description), false);
+        parent::__construct(new TypeDescription("Object", ["properties"=>$description]), false);
         $this->childrenType = $arrayMemberType;
     }
 

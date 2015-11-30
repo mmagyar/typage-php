@@ -1,18 +1,19 @@
 <?php
-use mmagyar\mmmcms\type\ArrayList;
-use mmagyar\mmmcms\type\Boolean;
-use mmagyar\mmmcms\type\Double;
-use mmagyar\mmmcms\type\Either;
-use mmagyar\mmmcms\type\Integer;
-use mmagyar\mmmcms\type\Nullable;
-use mmagyar\mmmcms\type\Number;
-use mmagyar\mmmcms\type\Object;
-use mmagyar\mmmcms\type\Text;
-use mmagyar\mmmcms\type\Type;
-use mmagyar\mmmcms\type\Union;
+use mmagyar\type\ArrayList;
+use mmagyar\type\Boolean;
+use mmagyar\type\Double;
+use mmagyar\type\Either;
+use mmagyar\type\Integer;
+use mmagyar\type\Nullable;
+use mmagyar\type\Number;
+use mmagyar\type\Object;
+use mmagyar\type\Text;
+use mmagyar\type\Type;
+use mmagyar\type\Union;
 
 /** Copyright (C) 2015 Magyar Máté dev@mmagyar.com */
 
+//Composer autoloader must be loaded to use this file.
 
 function boolean() {
     return new Boolean();

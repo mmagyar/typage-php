@@ -10,7 +10,13 @@ class Text extends AbstractAny {
 
     protected $validatorRegex = "";
 
-    //TODO maybe add min and maximum length
+    /**
+     * String length properties matching deliberately, You can check string length with regex.
+     * Length regex : /^.{8,10}$/ // matches any string between 8 and 10 characters
+     * Or: /^.{8,10}$/s matches any string between 8 and 10 characters, including new line characters
+     * Text constructor.
+     * @param null|string $validatorRegex
+     */
     public function __construct($validatorRegex = null) {
 
         $accepted = [];

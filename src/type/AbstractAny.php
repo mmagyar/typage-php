@@ -3,7 +3,6 @@
 
 namespace mmagyar\type;
 
-use Closure;
 use InvalidArgumentException;
 
 abstract class AbstractAny extends Type {

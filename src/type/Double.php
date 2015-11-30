@@ -10,8 +10,7 @@ final class Double extends Number {
 
      final protected function subTypeCheck($value, $variableName, $soft) {
          //TODO should integer be accepted as double?
-         if (!is_numeric($value)) {
-//             if (!is_float($value)) {
+         if (!is_numeric($value)) {  //if (!is_float($value)) {
             if ($soft) {
                 return None::getInstance();
             }

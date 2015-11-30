@@ -16,9 +16,7 @@ class ArrayList extends Collection {
      * @param Type|null $arrayMemberType , if it's not null, every element will be validated for type
      */
     public function __construct(Type $arrayMemberType = null) {
-        //This way the description is more JSON idiomatic, but is it clear?
-        $type = new TypeDescription("", [$arrayMemberType->getTypeDescription()]);
-        //$type = new TypeDescription("ArrayList", ["collectionOf" => $arrayMemberType->getTypeDescription()]);
+        $type = new TypeDescription("Array", ["items" => $arrayMemberType->getTypeDescription()]);
         parent::__construct($type, false);
         $this->childrenType = $arrayMemberType;
     }
