@@ -2,6 +2,7 @@
 <?php
 /** Copyright (C) 2015 Magyar Máté dev@mmagyar.com */
 require "../vendor/autoload.php";
+use mmagyar\type\Any;
 use mmagyar\type\ArrayList;
 use mmagyar\type\Boolean;
 use mmagyar\type\Double;
@@ -11,6 +12,8 @@ use mmagyar\type\None;
 use mmagyar\type\Nullable;
 use mmagyar\type\Object;
 use mmagyar\type\Text;
+use mmagyar\type\Type;
+use mmagyar\type\TypeDescription;
 use mmagyar\type\Union;
 
 
@@ -63,7 +66,18 @@ $type = new Object([
     //Nullable means that the variable can be null
     'myNullable'      => new Nullable(
         new Double()
-    )
+    ),
+
+    //Any type, it will accept any value (or even null if you set allowNull to true)
+    //You can validate it with a closure,
+    // Don't forget to call and return `handleTypeError` function in case your validation fails
+    // otherwise your type might not work well with nested types
+    // You have to supply your own TypeDescription
+    //Use it only for very special types, for more general ones, extend AbstractAny
+    'mySpecialAny'    => new Any(new TypeDescription("EvenNumber"), function ($value, $variableName, $soft) {
+        if (!is_int($value) || !($value % 2 == 0)) return Type::handleTypeError("EvenNumber", $value, $variableName, $soft);
+        return $value;
+    })
 ]);
 
 //After you finished declaring your variables you can get the type definition in valid JSON format
@@ -81,7 +95,8 @@ $data = [
     'myUnion'         => 'this could be an int as well, like 22',
     'myNumber'        => 22,
     'myNone'          => "You will not see this string after validation",
-    'myNullable'      => 32.3
+    'myNullable'      => "32.3",
+    'mySpecialAny'    => 56
 
 ];
 echo "\n\nData before checking\n\n";
@@ -93,7 +108,15 @@ echo json_encode($data, JSON_PRETTY_PRINT);
 //Don't forget to grab the output of the function. The original request array or object will not be modified.
 //Defaults will be added here, and types will be corrected if they are misaligned
 //string(3) "234" will become int 234 if Integer type was defined, or float 234.00 if Double was used
-$result = $type->check($data, 'request');
+//You can turn this off in a Number class static property called $strictNumberCheck
+$result=null;
+try {
+    $result = $type->check($data, 'request');
+} catch (Exception $e) {
+    echo "</pre><h3>";
+    echo $e->getMessage();
+    echo "</h3><pre>";
+}
 echo "\n\nData after checking\n\n";
 //Print the result to see how the checking transforms the data.
 echo json_encode($result, JSON_PRETTY_PRINT);

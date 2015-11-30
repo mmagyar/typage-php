@@ -34,3 +34,19 @@ $validator = new Object(
 
 $validatedData = $validator->check($input, "request");
 ```
+
+
+### Why this instead of JSON schema?
+Above all that JSON schema provides, this library provides:
+
+- All properties are Required by default
+- Null is not handled as meaningful data, a property must be explicitly declared Nullable.
+- Easy to extend*.
+- It's safer and easier to declare the type annotations, you always know what are the possible properties from the constructor's signature.
+- It's in the same language and doesn't necessarily require a separate file.
+- You can pass around validators in you application, without any concern, since they are regular immutable php Objects.
+- We can generate a JSON schema from the definition** ;)
+
+\* You can just grab the Any class and write a validator function, since sometimes you have to validate against the database. You can easily extend AbstractAny class, to create you own types.
+
+**Syntax slightly differs
