@@ -40,6 +40,7 @@ $validatedData = $validator->check($input, "request");
 Above all that JSON schema provides, this library provides:
 
 - All properties are Required by default
+- Error handling is automatically done with exceptions, by default, no need to check the result for errors. 
 - Null is not handled as meaningful data, a property must be explicitly declared Nullable.
 - Easy to extend*.
 - It's safer and easier to declare the type annotations, you always know what are the possible properties from the constructor's signature.
