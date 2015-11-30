@@ -22,20 +22,13 @@ class ArrayList extends Collection {
     }
 
     function dataTypeCheck($value, $variableName, $soft) {
-        if (!is_array($value)) {
-            if ($soft) {
-                return None::getInstance();
-            }
-
-            throw new InvalidArgumentException(
-                "Type must be array, type of value named: $variableName given: " . gettype($value) .
-                " with data: " . static::safePrint($value)
-            );
-        }
+        if (!is_array($value))
+            return static::handleTypeError($this->getTypeString(), $value, $variableName, $soft);
 
         if ($this->childrenType !== null) {
             foreach ($value as $key => $element) {
-                $this->childrenType->check($element, "{$variableName}[{$key}]");
+                $result = $this->childrenType->check($element, "$variableName:[{$key}]", $soft);
+                if ($result instanceof None) return $result;
             }
         }
 

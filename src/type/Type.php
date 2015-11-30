@@ -3,6 +3,7 @@
 
 namespace mmagyar\type;
 
+use InvalidArgumentException;
 use stdClass;
 
 /**
@@ -38,6 +39,16 @@ abstract class Type {
 
     protected function __construct(TypeDescription $typeDescription) {
         $this->typeDescription = $typeDescription;
+    }
+
+    public static function handleTypeError($expectedType, $value,$variableName,$soft){
+        if ($soft) return new None();
+
+        $errorString = "Type must be " . $expectedType .
+        ", type of value named `$variableName`: " . gettype($value) .
+        " with data: " . static::safePrint($value);
+
+        throw new InvalidArgumentException($errorString);
     }
 
     /**

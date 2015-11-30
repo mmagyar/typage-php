@@ -13,6 +13,7 @@ class Number extends AbstractAny {
     private $max;
 
     protected $typeName = "Number";
+    public static $strictNumberCheck = false;
 
     /**
      * Number constructor.
@@ -56,16 +57,9 @@ class Number extends AbstractAny {
     }
 
     final protected function dataTypeCheck($value, $variableName, $soft) {
-        if (!is_numeric($value)) {
-            if ($soft) {
-                return None::getInstance();
-            }
+        if (!is_numeric($value) || (static::$strictNumberCheck && is_string($value)))
+            return static::handleTypeError($this->getTypeString(), $value, $variableName, $soft);
 
-            throw new InvalidArgumentException(
-                "Type must be numeric, type of value named: $variableName given: " .
-                gettype($value) . " with data: " . static::safePrint($value)
-            );
-        }
 
 
         if (!$this->checkRange($value, $variableName, $soft)) {

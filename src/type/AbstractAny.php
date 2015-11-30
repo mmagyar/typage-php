@@ -20,24 +20,12 @@ abstract class AbstractAny extends Type {
     }
 
     final public function check($value, $variableName = "unknown", $soft = false) {
-        if ($this->allowNull && $value === null) {
-            return $value;
-        }
+        if ($this->allowNull && $value === null) return $value;
 
-        if (!$this->allowNull && $value === null) {
-            if ($soft) {
-                return None::getInstance();
-            }
-
-            throw new InvalidArgumentException(
-                "Type must be " . $this->getTypeString() .
-                ", type of value named: $variableName given: " . gettype($value) .
-                " with data: " . static::safePrint($value)
-            );
-        }
+        if (!$this->allowNull && $value === null)
+            return static::handleTypeError($this->getTypeString(), $value, $variableName, $soft);
 
         return $this->dataTypeCheck($value, $variableName, $soft);
-
     }
 
 

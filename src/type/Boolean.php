@@ -13,16 +13,8 @@ final class Boolean extends AbstractAny {
     }
 
     final function dataTypeCheck($value, $variableName, $soft) {
-        if (!is_bool($value)) {
-            if ($soft) {
-                return None::getInstance();
-            }
-
-            throw new InvalidArgumentException(
-                "Type must be Boolean, type of value named: $variableName given: " . gettype($value) .
-                " with data: " . static::safePrint($value)
-            );
-        }
+        if (!is_bool($value))
+            return static::handleTypeError($this->getTypeString(), $value, $variableName, $soft);
 
         return $value;
     }

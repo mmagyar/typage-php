@@ -28,15 +28,8 @@ class Text extends AbstractAny {
     }
 
     final protected function dataTypeCheck($value, $variableName, $soft) {
-        if (!is_string($value)) {
-            if ($soft) return None::getInstance();
-
-
-            throw new InvalidArgumentException(
-                "Type must be String, type of value named: $variableName given: " . gettype($value) .
-                " with data: " . static::safePrint($value)
-            );
-        }
+        if (!is_string($value))
+            return static::handleTypeError($this->getTypeString(), $value, $variableName, $soft);
 
         if ($this->validatorRegex !== null && !preg_match($this->validatorRegex, $value)) {
             if ($soft) return None::getInstance();

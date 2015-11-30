@@ -7,7 +7,7 @@ namespace mmagyar\type;
 use InvalidArgumentException;
 
 class TypeDescription {
-    private $possibleValues;
+    private $additionalFields;
     private $typeName;
 
     /**
@@ -16,23 +16,24 @@ class TypeDescription {
      * @param string|array $additionalFields
      */
     public function __construct($typename, $additionalFields = array()) {
-        $this->typeName       = $typename;
-        $this->possibleValues = $additionalFields;
+        $this->typeName         = $typename;
+        $this->additionalFields = $additionalFields;
     }
 
     public function describe() {
-        $description = $this->createDescribe($this->possibleValues);
+        $description = $this->createDescribe($this->additionalFields, true);
 
         if ($this->typeName) {
             if (isset($description[Type::$propertyPrefix . "type"]))
                 throw new InvalidArgumentException("Additional fields can not contain key '" . Type::$propertyPrefix . "type'");
-            $description = array_merge([Type::$propertyPrefix . 'type' => $this->typeName], $description);
+            $typeNameArray = [Type::$propertyPrefix . 'type' => $this->typeName];
+            $description   = $description !== null ? array_merge($typeNameArray, $description) : $typeNameArray;
         }
 
         return $description;
     }
 
-    protected function  createDescribe($value) {
+    protected function  createDescribe($value, $mustBeArray = false) {
         if ($value instanceof TypeDescription) {
             return $value->describe();
         } else if ($value instanceof Type) {
@@ -40,6 +41,10 @@ class TypeDescription {
         } else if (is_array($value)) {
             return array_map(array($this, 'createDescribe'), $value);
         }
+
+        if ($mustBeArray && $value !== null) throw new InvalidArgumentException(
+            "createDescribe was called with a non array|Type|TypeDescription|null parameter"
+        );
 
         return $value;
     }

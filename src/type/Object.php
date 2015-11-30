@@ -47,9 +47,9 @@ class Object extends AbstractAny {
         return $this->childrenType[$name]->check($value, $name, $soft);
     }
 
-    public function createGetter($arguemnts) {
-        return function ($name) use ($arguemnts) {
-            return $this->check($arguemnts, $name);
+    public function createGetter($arguments) {
+        return function ($name) use ($arguments) {
+            return $this->check($arguments, $name);
         };
     }
 

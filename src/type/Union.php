@@ -7,7 +7,6 @@ namespace mmagyar\type;
 use InvalidArgumentException;
 
 
-
 /**
  * Class Either
  * Wrap another Type class in this to make it optional with a default value
@@ -42,16 +41,6 @@ class Union extends AbstractAny {
             if (!($result instanceof None)) return $result;
         }
 
-
-        if ($soft) {
-            return None::getInstance();
-        }
-
-        throw new InvalidArgumentException(
-            "Type must be one of the union types: " . $this->getTypeDescription() . ", type of value named: $variableName given: " .
-            gettype($value) . " with data: " . static::safePrint($value)
-
-
-        );
+        return static::handleTypeError($this->getTypeString(), $value, $variableName, $soft);
     }
 }

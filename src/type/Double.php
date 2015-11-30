@@ -8,18 +8,10 @@ use InvalidArgumentException;
 final class Double extends Number {
     protected $typeName = "Double";
 
-     final protected function subTypeCheck($value, $variableName, $soft) {
-         //TODO should integer be accepted as double?
-         if (!is_numeric($value)) {  //if (!is_float($value)) {
-            if ($soft) {
-                return None::getInstance();
-            }
-            throw new InvalidArgumentException(
-                "Type must be double(float), type of value named: $variableName given: " .
-                gettype($value) .
-                " with data: " . static::safePrint($value)
-            );
-        }
+    final protected function subTypeCheck($value, $variableName, $soft) {
+        //TODO should integer be accepted as double?
+        if (!is_numeric($value))  //if (!is_float($value)) {
+            return static::handleTypeError($this->getTypeString(), $value, $variableName, $soft);
 
         return floatval($value);
     }
