@@ -20,10 +20,12 @@ class Any extends AbstractAny {
      * @param bool            $allowNull
      */
     public function __construct(
-        TypeDescription $description,
+        TypeDescription $description = null,
         Closure $validatorFunction = null,
         $allowNull = false
     ) {
+        if ($description === null) $description = new TypeDescription("Any", ["allowNull" => $allowNull]);
+
         parent::__construct($description, $allowNull);
         $this->validatorFunction = $validatorFunction;
     }
