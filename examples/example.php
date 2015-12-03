@@ -2,19 +2,19 @@
 <?php
 /** Copyright (C) 2015 Magyar Máté dev@mmagyar.com */
 require "../vendor/autoload.php";
-use mmagyar\type\Any;
-use mmagyar\type\ArrayList;
-use mmagyar\type\Boolean;
-use mmagyar\type\Double;
-use mmagyar\type\Either;
-use mmagyar\type\Integer;
-use mmagyar\type\None;
-use mmagyar\type\Nullable;
-use mmagyar\type\Object;
-use mmagyar\type\Text;
-use mmagyar\type\Type;
-use mmagyar\type\TypeDescription;
-use mmagyar\type\Union;
+use mmagyar\typage\Any;
+use mmagyar\typage\ArrayList;
+use mmagyar\typage\Boolean;
+use mmagyar\typage\Double;
+use mmagyar\typage\Either;
+use mmagyar\typage\Integer;
+use mmagyar\typage\None;
+use mmagyar\typage\Nullable;
+use mmagyar\typage\Object;
+use mmagyar\typage\Text;
+use mmagyar\typage\Type;
+use mmagyar\typage\TypeDescription;
+use mmagyar\typage\Union;
 
 
 echo "testing types\n";
