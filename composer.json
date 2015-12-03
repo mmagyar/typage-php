@@ -1,7 +1,9 @@
 {
     "name": "mmagyar/typage-php",
     "description": "Easily validate data with type classes",
-    "type": "typage-php",
+    "type": "library",
+    "keywords": ["Validation", "Type", "Typesafe", "Checking", "Typechecking"],
+    "homepage": "https://github.com/mmagyar/typage-php",
     "require": {
         "php": ">=5.4"
     },
@@ -9,7 +11,8 @@
     "authors": [
         {
             "name": "Mate Magyar",
-            "email": "dev@mmagyar.com"
+            "email": "dev@mmagyar.com",
+            "homepage" : "https://mmagyar.com"
         }
     ],
     "minimum-stability": "beta",
