@@ -3,8 +3,6 @@
 
 namespace mmagyar\typage;
 
-use InvalidArgumentException;
-
 
 class Text extends AbstractAny {
 
@@ -33,7 +31,7 @@ class Text extends AbstractAny {
 
         if ($this->validatorRegex !== null && !preg_match($this->validatorRegex, $value)) {
             if ($soft) return None::getInstance();
-            throw new InvalidArgumentException(
+            throw new TypeError(
                 "Value named: $variableName with data: \"$value\" does not conform to regex: $this->validatorRegex"
             );
         }

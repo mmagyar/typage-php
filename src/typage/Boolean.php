@@ -3,8 +3,6 @@
 
 namespace mmagyar\typage;
 
-use InvalidArgumentException;
-
 
 final class Boolean extends AbstractAny {
 

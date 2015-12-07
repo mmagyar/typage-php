@@ -3,7 +3,6 @@
 
 namespace mmagyar\typage;
 
-use InvalidArgumentException;
 
 final class Integer extends Number {
 

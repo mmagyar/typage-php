@@ -3,7 +3,6 @@
 
 namespace mmagyar\typage;
 
-use InvalidArgumentException;
 
 
 class ArrayList extends Collection {

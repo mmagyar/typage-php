@@ -3,7 +3,6 @@
 
 namespace mmagyar\typage;
 
-use InvalidArgumentException;
 
 abstract class AbstractAny extends Type {
 

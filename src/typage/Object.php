@@ -3,8 +3,6 @@
 
 namespace mmagyar\typage;
 
-use InvalidArgumentException;
-
 
 class Object extends AbstractAny {
 
@@ -26,14 +24,14 @@ class Object extends AbstractAny {
 
     public function get($arguments, $name, $soft = false) {
         if (!array_key_exists($name, $this->childrenType)) {
-            throw new InvalidArgumentException("This Object does not have property: $name");
+            throw new TypeError("This Object does not have property: $name");
         }
 
         $isObject = is_object($arguments);
         $isArray = is_array($arguments);
 
         if (!($isArray || $isObject)) {
-            throw new InvalidArgumentException("\$arguments must be an array or an object");
+            throw new TypeError("\$arguments must be an array or an object");
         }
 
         if ($isArray && array_key_exists($name, $arguments)) {
@@ -41,7 +39,7 @@ class Object extends AbstractAny {
         } else if ($isObject && property_exists($this->childrenType, $name)) {
             $value = $arguments->{$name};
         } else {
-            throw new InvalidArgumentException("Property $name does not exist on \$arguments ");
+            throw new TypeError("Property $name does not exist on \$arguments ");
         }
 
         return $this->childrenType[$name]->check($value, $name, $soft);
@@ -61,7 +59,7 @@ class Object extends AbstractAny {
                 return None::getInstance();
             }
 
-            throw new InvalidArgumentException(
+            throw new TypeError(
                 "Type must be object, type of value named: $variableName given: " . gettype($value) .
                 " with data: " . static::safePrint($value)
             );
@@ -74,13 +72,13 @@ class Object extends AbstractAny {
             } else if ($isObject && !property_exists($value, $key)) {
                 $value->{$key} = null;
             }
-            //throw new InvalidArgumentException("Required property: $key is missing from object: $variableName");
+            //throw new TypeError("Required property: $key is missing from object: $variableName");
         }
 
         if ($this->childrenType !== null) {
             foreach ($value as $key => $element) {
                 if (!isset($this->childrenType[$key])) {
-                    throw new InvalidArgumentException(
+                    throw new TypeError(
                         "Property $key in array: $variableName does not have a validator Type"
                     );
                 }

@@ -4,7 +4,6 @@
 namespace mmagyar\typage;
 
 use Closure;
-use InvalidArgumentException;
 
 
 class Any extends AbstractAny {

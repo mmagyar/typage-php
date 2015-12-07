@@ -3,8 +3,6 @@
 
 namespace mmagyar\typage;
 
-use InvalidArgumentException;
-use stdClass;
 
 /**
  * Class Type
@@ -48,7 +46,7 @@ abstract class Type {
         ", type of value named `$variableName`: " . gettype($value) .
         " with data: " . static::safePrint($value);
 
-        throw new InvalidArgumentException($errorString);
+        throw new TypeError($errorString);
     }
 
     /**

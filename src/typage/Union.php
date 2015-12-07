@@ -4,8 +4,6 @@
 
 namespace mmagyar\typage;
 
-use InvalidArgumentException;
-
 
 /**
  * Class Either

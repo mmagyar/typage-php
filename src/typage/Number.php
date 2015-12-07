@@ -4,8 +4,6 @@
 
 namespace mmagyar\typage;
 
-use InvalidArgumentException;
-
 
 class Number extends AbstractAny {
 
@@ -40,7 +38,7 @@ class Number extends AbstractAny {
     protected function checkRange($value, $variableName, $soft) {
         if ($this->min !== null && floatval($value) < $this->min) {
             if ($soft) return false;
-            throw new InvalidArgumentException(
+            throw new TypeError(
                 "Value named: $variableName has a value of " . strval($value) .
                 " which is smaller then the minimum: " . strval($this->min)
             );
@@ -48,7 +46,7 @@ class Number extends AbstractAny {
 
         if ($this->max !== null && floatval($value) > $this->max) {
             if ($soft) return false;
-            throw new InvalidArgumentException(
+            throw new TypeError(
                 "Value named: $variableName has a value of " . strval($value) .
                 " which is bigger then the maximum: " . strval($this->max)
             );
