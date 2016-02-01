@@ -6,7 +6,7 @@ namespace mmagyar\typage;
 
 class Text extends AbstractAny {
 
-    protected $validatorRegex = "";
+    protected $validatorRegex = null;
 
     /**
      * String length properties matching deliberately, You can check string length with regex.
@@ -29,12 +29,13 @@ class Text extends AbstractAny {
         if (!is_string($value))
             return static::handleTypeError($this->getTypeString(), $value, $variableName, $soft);
 
-        if ($this->validatorRegex !== null && !preg_match($this->validatorRegex, $value)) {
-            if ($soft) return None::getInstance();
-            throw new TypeError(
-                "Value named: $variableName with data: \"$value\" does not conform to regex: $this->validatorRegex"
-            );
-        }
+        if ($this->validatorRegex)
+            if (!preg_match($this->validatorRegex, $value)) {
+                if ($soft) return None::getInstance();
+                throw new TypeError(
+                    "Value named: $variableName with data: \"$value\" does not conform to regex: $this->validatorRegex"
+                );
+            }
 
 
         return $this->additionalCheck($value, $variableName, $soft);
